@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="purchase_request_line_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase.request.line.tree.inherit</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="task_resource.purchase_request_line_tree"/>
+        <field name="priority" eval="102"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree colors="red:purchase_state not in ('done','purchase','cancel') and request_state!='rejected';
+                    green:purchase_state=='done';
+                    blue:purchase_state=='purchase'" create="false" string="Purchase Request Lines">
+                    <field name="request_id"/>
+                    <field name="request_state"/>
+                    <field name="requested_by"/>
+                    <field name="assigned_to"/>
+                    <field name="date_required"/>
+                    <field groups="analytic.group_analytic_accounting" name="analytic_account_id"/>
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="specifications"/>
+                    <field name="product_qty"/>
+                    <field name="purchased_qty"/>
+                    <field name="qty_on_hand"/>
+                    <field name="remaining_qty"/>
+                    <field groups="product.group_uom" name="product_uom_id"/>
+                    <field name="purchase_state"/>
+                    <field name="supplier_id"/>
+                </tree>
+            </xpath>
+        </field>
+    </record>
+</odoo>
